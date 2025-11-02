@@ -49,29 +49,27 @@ public class ElevatorTester {
 
         Elevator elevator = new Elevator(1, 10, 8);
         
-        // Starts at floor 1 with doors closed
-        System.out.println("=== Attempting to board (doors closed) ===");
-        elevator.addPassengers(3);  // should fail (doors closed)
-        
-        // Go to floor 1 (already there, just open doors)
-        System.out.println("\n=== Opening doors at floor 1 ===");
-        elevator.addDestination(2);
-        elevator.stepAction();
-        elevator.addDestination(1);
-        elevator.stepAction();
-        elevator.stepAction();
-        
-        // Passengers board
-        System.out.println("\n=== Boarding passengers ===");
+        // Test 1: Try to board with doors closed (should fail)
+        System.out.println("=== Test 1: Attempting to board with doors closed ===");
         elevator.addPassengers(3);
         
-        // Select destination
-        System.out.println("\n=== Elevating to floor 8 ===");
+        // Test 2: Open doors at current floor and board
+        System.out.println("\n=== Test 2: Opening doors at floor 1 and boarding ===");
+        elevator.open();
+        elevator.addPassengers(3);
+        
+        // Test 3: Elevate to floor 8
+        System.out.println("\n=== Test 3: Traveling to floor 8 ===");
         elevator.addDestination(8);
         elevator.elevate(15);
         
-        // Passengers exit
-        System.out.println("\n=== Passengers exiting ===");
+        // Test 4: Add another destination (floor 3): should go back down
+        System.out.println("\n=== Test 4: Adding destination floor 3 (test direction reversal) ===");
+        elevator.addDestination(3);
+        elevator.elevate(10);
+        
+        // Test 5: Passengers exit
+        System.out.println("\n=== Test 5: Passengers exiting ===");
         elevator.exitPassengers(3);
         
         elevator.printElevator();
@@ -88,8 +86,7 @@ public class ElevatorTester {
         
         // Ground floor - group 1 boards
         System.out.println("=== Group 1 boards at ground floor ===");
-        elevator.addDestination(1);
-        elevator.elevate(2);
+        elevator.open();  // Open doors at starting floor
         elevator.addPassengers(4);
         elevator.addDestination(5);
         
@@ -101,16 +98,23 @@ public class ElevatorTester {
         
         // Test capacity
         System.out.println("\n=== Testing capacity limit ===");
-        elevator.addPassengers(4);  // Should fail - exceeds capacity
-        
+        elevator.addPassengers(4);
+        elevator.addPassengers(3);  
+
         // Continue to higher floors
         System.out.println("\n=== Continuing to floors 10 and 12 ===");
         elevator.addDestination(10);
         elevator.addDestination(12);
         elevator.elevate(20);
         
-        // Passengers exit
+        // Some passengers exit at floor 12
+        System.out.println("\n=== Passengers exiting at floor 12 ===");
         elevator.exitPassengers(5);
+        
+        // Go back down to floor 3
+        System.out.println("\n=== Going back down to floor 3 ===");
+        elevator.addDestination(3);
+        elevator.elevate(15);
         
         elevator.printElevator();
     }
