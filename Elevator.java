@@ -61,7 +61,7 @@ public class Elevator {
      * @param - count number of passengers boarding
      * @returns true if successful
      */
-    public boolean addPassengers() {
+    public boolean addPassengers(int count) {
         return true;
     }
 
@@ -70,7 +70,7 @@ public class Elevator {
      * @param - count number of passengers exiting
      * @returns true if successful
      */
-    public boolean exitPassengers() {
+    public boolean exitPassengers(int count) {
         return true;
     }
 
